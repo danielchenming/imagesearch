@@ -1,26 +1,79 @@
 <!doctype html>
 <html>
-    <head><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></head>
-    <body>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f0f0f0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            font-family: Arial, sans-serif; /* 使用通用字体 */
+        }
+        .navbar {
+            background-color: #ffffff; /* 浅色背景 */
+            border-bottom: 1px solid #e0e0e0; /* 浅灰色边框线 */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .navbar-brand {
+            color: #337ab7; /* 主题色 */
+            font-weight: bold;
+            font-size: 24px;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .btn-custom {
+            background-color: #337ab7;
+            color: #ffffff;
+            border-color: #2e6da4;
+            font-size: 16px;
+            padding: 10px 20px;
+            margin-right: 10px; /* 按钮间距 */
+        }
+        .btn-custom:hover,
+        .btn-custom:focus,
+        .btn-custom:active,
+        .btn-custom.active {
+            background-color: #286090;
+            border-color: #204d74;
+        }
+        figure {
+            text-align: center;
+            margin-bottom: 0; /* 修正图像底部的额外空白 */
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-default">
         <div class="container">
-            <h1>Simple image search engine</h1>
-            <form method="POST" enctype="multipart/form-data">
-                <input type="file" name="query_img"><br>
-                <input type="submit">
-            </form>
-            <h2>Query:</h2>
-            {% if query_path %}
-            <img src="{{ query_path }}" width="300px">
-            {% endif %}
-            <h2>Results:</h2>
-            {% for score in scores %}
-            <figure style="float: left; margin-right: 20px; margin-bottom: 20px;">
-                <img src="{{ score[1] }}" height="200px">
-                <figcaption>{{ score[0] }}</figcaption>
-            </figure>
-            {% endfor %}
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">简易图片搜索引擎</a>
+            </div>
         </div>
-    </body>
+    </nav>
+
+    <div class="container">
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="query_img"><br><br>
+            <button type="submit" class="btn btn-custom">搜索</button>
+        </form>
+
+        <h2>查询原图:</h2>
+        {% if query_path %}
+        <img src="{{ query_path }}" width="300px">
+        {% endif %}
+
+        <h2>查询结果:</h2>
+        {% for score in scores %}
+        <figure style="float: left; margin-right: 20px; margin-bottom: 20px;">
+            <img src="{{ score[1] }}" height="200px">
+            <figcaption>偏差值：{{ score[0] }}</figcaption>
+        </figure>
+        {% endfor %}
+        <div style="clear: both;"></div>
+    </div>
+</body>
 </html>
-
-
