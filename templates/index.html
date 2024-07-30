@@ -1,21 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
+    <title>简易图片搜索引擎</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <style>
         body {
             background-color: #f0f0f0;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            font-family: Arial, sans-serif; /* 使用通用字体 */
+            font-family: Arial, sans-serif;
         }
         .navbar {
-            background-color: #ffffff; /* 浅色背景 */
-            border-bottom: 1px solid #e0e0e0; /* 浅灰色边框线 */
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             margin-bottom: 20px;
         }
         .navbar-brand {
-            color: #337ab7; /* 主题色 */
+            color: #337ab7;
             font-weight: bold;
             font-size: 24px;
         }
@@ -31,7 +32,7 @@
             border-color: #2e6da4;
             font-size: 16px;
             padding: 10px 20px;
-            margin-right: 10px; /* 按钮间距 */
+            margin-right: 10px;
         }
         .btn-custom:hover,
         .btn-custom:focus,
@@ -42,9 +43,25 @@
         }
         figure {
             text-align: center;
-            margin-bottom: 0; /* 修正图像底部的额外空白 */
+            margin-bottom: 0;
         }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 当表单提交时进行验证
+            document.querySelector('form').addEventListener('submit', function(event) {
+                // 获取文件输入框
+                const fileInput = document.querySelector('input[type="file"]');
+                // 检查是否选择了文件
+                if (fileInput.files.length === 0) {
+                    // 如果没有选择文件，则阻止表单提交
+                    event.preventDefault();
+                    // 提示用户选择文件
+                    alert('请先选择要上传的文件！');
+                }
+            });
+        });
+    </script>
 </head>
 <body>
     <nav class="navbar navbar-default">
@@ -57,7 +74,7 @@
 
     <div class="container">
         <form method="POST" enctype="multipart/form-data">
-            <input type="file" name="query_img"><br><br>
+            <input type="file" name="query_img" required><br><br>
             <button type="submit" class="btn btn-custom">搜索</button>
         </form>
 
